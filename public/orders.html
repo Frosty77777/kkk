@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>My Orders</h1>
+            <div class="auth-controls">
+                <button id="backBtn" class="btn btn-secondary">Back to Products</button>
+            </div>
+        </header>
+
+        <main>
+            <section class="orders-section">
+                <div id="ordersLoading" class="loading">Loading orders...</div>
+                <div id="ordersList" class="orders-list"></div>
+                <div id="ordersError" class="error-message"></div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/orders.js"></script>
+</body>
+</html>
+
