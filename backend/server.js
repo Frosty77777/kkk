@@ -1,10 +1,13 @@
 require('dotenv').config();
 const express = require('express');
+const path = require('path');
 const cors = require('cors');
 const session = require('express-session');
 const MongoStore = require('connect-mongo');
 const connectDB = require('./config/database');
 const errorHandler = require('./middleware/errorHandler');
+
+const PUBLIC_DIR = path.join(__dirname, '..', 'public');
 
 // Import routes
 const productRoutes = require('./routes/products');
@@ -25,7 +28,7 @@ app.use(cors({
 }));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static('public'));
+app.use(express.static(PUBLIC_DIR));
 
 // Session configuration
 // Use memory store if MongoDB is not available (for development)
@@ -76,17 +79,17 @@ app.use('/api/orders', orderRoutes);
 
 // Root route
 app.get('/', (req, res) => {
-  res.sendFile(__dirname + '/public/index.html');
+  res.sendFile(path.join(PUBLIC_DIR, 'index.html'));
 });
 
 // Login page
 app.get('/login.html', (req, res) => {
-  res.sendFile(__dirname + '/public/login.html');
+  res.sendFile(path.join(PUBLIC_DIR, 'login.html'));
 });
 
 // Register page
 app.get('/register.html', (req, res) => {
-  res.sendFile(__dirname + '/public/register.html');
+  res.sendFile(path.join(PUBLIC_DIR, 'register.html'));
 });
 
 // 404 handler (must have next parameter even if not used)

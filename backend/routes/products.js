@@ -6,10 +6,10 @@ const { authenticate, authorizeAdmin } = require('../middleware/auth');
 const multer = require('multer');
 const path = require('path');
 
-// Multer storage for product images
+// Multer storage for product images (public is sibling of backend)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, path.join(__dirname, '..', 'public', 'uploads'));
+    cb(null, path.join(__dirname, '..', '..', 'public', 'uploads'));
   },
   filename: function (req, file, cb) {
     cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_'));

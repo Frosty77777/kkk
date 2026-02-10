@@ -178,9 +178,9 @@ async function deleteProduct(id) {
 }
 
 // Refresh button handler
-refreshBtn.addEventListener('click', () => {
-    loadProducts();
-});
+if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => loadProducts());
+}
 
 // Show message
 function showMessage(message, type) {

@@ -2,8 +2,12 @@ const mongoose = require('mongoose');
 
 const connectDB = async () => {
   try {
-    // We 'await' the connection and assign it to 'conn'
-    const conn = await mongoose.connect(process.env.MONGODB_URI);
+    // TLS workaround for Windows SSL handshake error with MongoDB Atlas
+    const conn = await mongoose.connect(process.env.MONGODB_URI, {
+      serverSelectionTimeoutMS: 10000,
+      tls: true,
+      tlsAllowInvalidCertificates: true, // Workaround for ERR_SSL_TLSV1_ALERT_INTERNAL_ERROR on Windows
+    });
 
     console.log(`MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {

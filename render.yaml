@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: web2assign2
+    runtime: node
+    region: oregon
+
+    # Build: install dependencies from backend folder
+    buildCommand: cd backend && npm install
+    startCommand: cd backend && node server.js
+
+    # Environment variables - set these in Render Dashboard
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        sync: false  # Set manually in Render Dashboard
+      - key: SESSION_SECRET
+        generateValue: true  # Render will auto-generate a secure secret

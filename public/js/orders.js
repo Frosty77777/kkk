@@ -130,9 +130,10 @@ async function changeItemQuantity(orderId, productId, currentQty) {
     const order = (window.ordersData || []).find(o => o._id === orderId);
     if (!order) return alert('Order not found locally');
 
-    // build updated items array
+    // build updated items array (compare ObjectId with string)
     const updatedItems = order.items.map(i => {
-        if ((i.product && i.product._id) === productId || i.product === productId) {
+        const prodId = i.product?._id?.toString?.() ?? String(i.product?._id ?? '');
+        if (prodId === String(productId)) {
             return { productId: i.product._id || i.product, quantity: newQty };
         }
         return { productId: i.product._id || i.product, quantity: i.quantity };

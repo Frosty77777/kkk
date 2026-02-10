@@ -71,13 +71,13 @@ exports.updateProduct = async (req, res, next) => {
     if (req.file) {
       // remove old image file if exists
       if (existing.image) {
-        const oldPath = path.join(__dirname, '..', 'public', existing.image.replace(/^\//, ''));
+        const oldPath = path.join(__dirname, '..', '..', 'public', existing.image.replace(/^\//, ''));
         fs.unlink(oldPath, () => {});
       }
       existing.image = `/uploads/${req.file.filename}`;
     } else if (req.body.removeImage === 'true') {
       if (existing.image) {
-        const oldPath = path.join(__dirname, '..', 'public', existing.image.replace(/^\//, ''));
+        const oldPath = path.join(__dirname, '..', '..', 'public', existing.image.replace(/^\//, ''));
         fs.unlink(oldPath, () => {});
       }
       existing.image = '';
@@ -119,7 +119,7 @@ exports.deleteProduct = async (req, res, next) => {
 
     // remove image file if exists
     if (product.image) {
-      const imgPath = path.join(__dirname, '..', 'public', product.image.replace(/^\//, ''));
+      const imgPath = path.join(__dirname, '..', '..', 'public', product.image.replace(/^\//, ''));
       fs.unlink(imgPath, () => {});
     }
 
